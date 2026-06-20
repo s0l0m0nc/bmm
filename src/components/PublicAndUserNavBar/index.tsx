@@ -85,7 +85,7 @@ export function PublicAndUserNavbar(props: Props) {
           <span className={IconNames.Tabler.DICE_3} />
         </ReButton>
         <ThemeToggle />
-        <ReButton
+        {/* <ReButton
           {...IconButtonProps}
           href={ExternalLinks.REPO}
           target="_blank"
@@ -101,7 +101,7 @@ export function PublicAndUserNavbar(props: Props) {
           }}
         >
           <span className={IconNames.Tabler.BRAND_GITHUB} />
-        </ReButton>
+        </ReButton> */}
         <NavUser />
       </NavbarContent>
       {showSearchInput() && (

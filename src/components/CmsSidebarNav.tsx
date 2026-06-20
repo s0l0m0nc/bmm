@@ -40,8 +40,7 @@ const cmsTone = {
   admin: {
     sidebarBackdrop:
       'bg-[radial-gradient(circle_at_top_right,rgba(244,63,94,0.13),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.08),transparent_38%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(251,113,133,0.18),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.1),transparent_38%)]',
-    logo:
-      'border-rose-500/15 bg-white/88 shadow-[0_10px_24px_-18px_rgba(244,63,94,0.35)] group-hover:border-rose-500/25 group-hover:shadow-[0_12px_28px_-18px_rgba(244,63,94,0.42)] dark:border-rose-300/12 dark:bg-rose-300/10',
+    logo: 'border-rose-500/15 bg-white/88 shadow-[0_10px_24px_-18px_rgba(244,63,94,0.35)] group-hover:border-rose-500/25 group-hover:shadow-[0_12px_28px_-18px_rgba(244,63,94,0.42)] dark:border-rose-300/12 dark:bg-rose-300/10',
     hover: 'hover:bg-rose-500/8',
     active:
       'bg-rose-500/10 text-rose-950 shadow-[0_12px_30px_-22px_rgba(244,63,94,0.35)] dark:bg-rose-300/10 dark:text-white',
@@ -49,8 +48,7 @@ const cmsTone = {
   user: {
     sidebarBackdrop:
       'bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.14),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.09),transparent_38%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.2),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.12),transparent_38%)]',
-    logo:
-      'border-sky-500/15 bg-white/88 shadow-[0_10px_24px_-18px_rgba(14,165,233,0.35)] group-hover:border-sky-500/25 group-hover:shadow-[0_12px_28px_-18px_rgba(14,165,233,0.45)] dark:border-white/10 dark:bg-white/10',
+    logo: 'border-sky-500/15 bg-white/88 shadow-[0_10px_24px_-18px_rgba(14,165,233,0.35)] group-hover:border-sky-500/25 group-hover:shadow-[0_12px_28px_-18px_rgba(14,165,233,0.45)] dark:border-white/10 dark:bg-white/10',
     hover: 'hover:bg-sky-500/8',
     active:
       'bg-sky-500/10 text-slate-900 shadow-[0_12px_30px_-22px_rgba(14,165,233,0.35)] dark:bg-white/10 dark:text-white',
@@ -118,7 +116,10 @@ export default function CmsSidebarNav(props: CmsSidebarNavProps) {
               'group relative h-11 justify-start gap-3 rounded-xl px-3 text-sm font-medium transition-[background-color,color,box-shadow,transform] duration-150 focus-visible:ring-2 focus-visible:ring-cyan-400/45',
               isMobile
                 ? 'hover:bg-content2/70 bg-transparent backdrop-blur'
-                : cn('text-foreground hover:text-foreground bg-transparent dark:text-white/85', tone.hover),
+                : cn(
+                    'text-foreground hover:text-foreground bg-transparent dark:text-white/85',
+                    tone.hover
+                  ),
               isActive && (isMobile ? 'bg-primary/10 text-primary' : tone.active)
             )}
           >
@@ -235,7 +236,7 @@ export default function CmsSidebarNav(props: CmsSidebarNavProps) {
             <div className="border-divider/40 relative border-t">
               <div className="p-3">
                 <div className="border-divider/60 flex items-center gap-1.5 rounded-xl border bg-white/42 p-1.5 shadow-[0_10px_24px_-20px_rgba(15,23,42,0.16)] backdrop-blur-md dark:bg-white/[0.04] dark:shadow-none">
-                  <ReButton
+                  {/* <ReButton
                     href={ExternalLinks.REPO}
                     target="_blank"
                     rel="noreferrer"
@@ -256,7 +257,7 @@ export default function CmsSidebarNav(props: CmsSidebarNavProps) {
                   >
                     <span className="truncate text-sm font-medium">项目地址</span>
                   </ReButton>
-                  <div className="bg-divider/70 h-7 w-px shrink-0" />
+                  <div className="bg-divider/70 h-7 w-px shrink-0" /> */}
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg">
                     <ThemeToggle />
                   </div>
@@ -288,7 +289,7 @@ export default function CmsSidebarNav(props: CmsSidebarNavProps) {
               <div className="truncate text-sm font-semibold tracking-wide">{brandText}</div>
             </div>
           </Link>
-          <ReButton
+          {/* <ReButton
             href={ExternalLinks.REPO}
             target="_blank"
             rel="noreferrer"
@@ -298,7 +299,7 @@ export default function CmsSidebarNav(props: CmsSidebarNavProps) {
             className="size-10 min-w-10 rounded-xl text-lg"
           >
             <span className={IconNames.Tabler.BRAND_GITHUB} />
-          </ReButton>
+          </ReButton> */}
           <ThemeToggle />
         </div>
 
