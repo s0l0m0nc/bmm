@@ -53,7 +53,7 @@ Apply Iconify changes in this repository by separating static CSS icons from dyn
 
 - Use `rg -n 'IconNames\\.' src app.config.ts` to inspect call sites after refactors.
 - Use `rg -n 'icon-\\[[^\\]]+\\]' src` to find remaining hardcoded static icon classes.
-- Run `pnpm exec tsc --noEmit --pretty false` and call out any unrelated `.next/types` issues separately.
+- Run `bun tsc --noEmit --pretty false` and call out any unrelated `.next/types` issues separately.
 
 ## Docs Reference
 

@@ -16,18 +16,18 @@ BMM（Bookmark Manager）是一个基于 Next.js 16 的全栈 TypeScript 应用�
 ## 常用命令
 
 ```bash
-pnpm dev              # 开发服务器（自动运行 db-init）
-pnpm build            # 生产构建
-pnpm start            # 生产服务器
+bun run dev              # 开发服务器（自动运行 db-init）
+bun run build            # 生产构建
+bun run start            # 生产服务器
 
-pnpm lint             # ESLint
-pnpm test             # 全部测试
-pnpm test -- <file>   # 指定测试文件
+bun run lint             # ESLint
+bun run test             # 全部测试
+bun run test -- <file>   # 指定测试文件
 
-pnpm db:test          # 测试数据库连接
-pnpm db:migrate       # 执行迁移
-pnpm db:push          # 推送 schema 变更（谨慎使用）
-pnpm studio           # Drizzle Studio
+bun run db:test          # 测试数据库连接
+bun run db:migrate       # 执行迁移
+bun run db:push          # 推送 schema 变更（谨慎使用）
+bun run studio           # Drizzle Studio
 
 # 生产环境：添加 -P 或 --production 参数
 ```
@@ -132,6 +132,6 @@ await db.update(schema.users).set({ name: 'Jane' }).where(eq(schema.users.id, us
 
 ## 备注
 
-- 包管理器：pnpm（必需）
-- Node 版本：>=24.0.0
+- 包管理器：bun（必需）
+- Bun 版本：>=1.3.14
 - 语言：错误消息和 UI 文案使用中文

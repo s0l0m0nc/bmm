@@ -1,48 +1,27 @@
-# Next 配置 output: standalone 可以减少镜像大小，因为它只会把用到的依赖打包到 .next/standalone/node_modules 下
-# 但是还有一些重要依赖不会被打包，比如 zx、drizzle-kit 等，它们只有手动执行相关 scripts 才会被用到，不属于 Next 应用的一部分
-# 已经尝试使用 COPY 手动复制这些依赖，但是很麻烦而且不好维护
-# 所以还是使用普通的 output 模式，通过手动删除不必要的文件，可控制镜像大小仅增加 ~300Mb
-
-
-FROM node:24-alpine AS base
-RUN corepack enable && pnpm -v
-
+FROM oven/bun:1-alpine AS base
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package.json pnpm-lock.yaml .npmrc .
+COPY package.json bun.lock .
 
-RUN pnpm install --frozen-lockfile
-
+RUN bun install --frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# docker 构建镜像时不需要预先配置数据库，所以不需要执行 db-init 脚本，这里直接 next build 就行
-# 忽略构建错误，因为在 Github Action 中构建时，全是静态的类型检查会导致一些错误
-RUN export IGNORE_BUILD_ERRORS=true && pnpm next build && pnpm prune --prod
-# 清理一些体积较大的、运行时不需要的文件
-RUN rm -rf doc .next/cache .next/trace \
-node_modules/.pnpm/@types+* \
-node_modules/.pnpm/caniuse* \
-node_modules/.pnpm/@ant-design+icons* \
-node_modules/.pnpm/vite* \
-node_modules/.pnpm/typescript@* \
-node_modules/.pnpm/eslint*
-RUN find node_modules/.pnpm/ -type f -name "*.ts" -delete
-
+RUN export IGNORE_BUILD_ERRORS=true && bun next build
+RUN rm -rf doc .next/cache .next/trace
 
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
-# zx 依赖 bash
 RUN apk add bash
 COPY --from=builder /app .
 
 EXPOSE 3000
 
-CMD ["pnpm", "run", "start"]
+CMD ["bun", "run", "start"]

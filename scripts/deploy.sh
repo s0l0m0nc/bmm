@@ -13,14 +13,14 @@ git pull
 git reset --hard
 
 echo "📦 安装依赖："
-pnpm i
+bun i
 
 echo "🔨 构建应用："
-pnpm build
+bun run build
 
 echo "文件夹大小："
 du -hd 1
 
 echo "🚀 启动服务："
 pm2 delete $pm2_process_name
-pm2 start "pnpm start" --name $pm2_process_name
+pm2 start "bun run start" --name $pm2_process_name

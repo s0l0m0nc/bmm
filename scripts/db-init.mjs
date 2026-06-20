@@ -17,9 +17,9 @@ async function testDBInitialed() {
     return res.length === 1
   } else if (process.env.DB_DRIVER === 'sqlite') {
     sql = `
-      SELECT name 
-      FROM sqlite_master 
-      WHERE type = 'table' 
+      SELECT name
+      FROM sqlite_master
+      WHERE type = 'table'
       AND name = 'publicBookmarks';`
     const res = await dbExecute(sql)
     return res.rows.length === 1
@@ -46,9 +46,9 @@ try {
     // echo(prefix + '已经初始化，跳过本次任务\n')
   } else {
     echo(prefix + '开始数据库初始化')
-    await $`pnpm drizzle-kit generate`
+    await $`bun drizzle-kit generate`
     echo(prefix + chalk.green('✅ 已生成本地快照'))
-    await $`pnpm drizzle-kit migrate`
+    await $`bun drizzle-kit migrate`
     echo(prefix + chalk.green('✅ 数据库初始化成功'))
   }
   exitWithDbClose()

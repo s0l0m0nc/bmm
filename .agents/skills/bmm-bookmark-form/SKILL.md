@@ -45,8 +45,8 @@ Update the bookmark create/edit flow from the form entry point first, then follo
 ## Verification
 
 - Prefer targeted verification over repo-wide commands when the repository already has unrelated failures.
-- For favicon probing utilities, run `pnpm exec vitest run src/utils/website-icon.test.ts`.
-- If TypeScript validation is needed, run `pnpm exec tsc --noEmit --pretty false` and call out any pre-existing `.next/types` issues separately from your change.
+- For favicon probing utilities, run `bun vitest run src/utils/website-icon.test.ts`.
+- If TypeScript validation is needed, run `bun tsc --noEmit --pretty false` and call out any pre-existing `.next/types` issues separately from your change.
 
 ## Example Requests
 

@@ -18,15 +18,15 @@ function parseArgs() {
   )
 
   if (args.help) {
-    echo(chalk.yellow('用法：pnpm user:reset-password'))
-    echo(chalk.yellow('或：pnpm user:reset-password -- --email user@example.com'))
+    echo(chalk.yellow('用法：bun run user:reset-password'))
+    echo(chalk.yellow('或：bun run user:reset-password -- --email user@example.com'))
     echo(chalk.yellow('运行后会交互输入新密码，密码不会出现在命令行历史中'))
     process.exit(0)
   }
 
   if (args.password || args.p || args._[1]) {
     echo(chalk.red('为了避免密码出现在命令行历史中，不再支持通过命令参数传入密码'))
-    echo(chalk.yellow('请使用：pnpm user:reset-password -- --email user@example.com'))
+    echo(chalk.yellow('请使用：bun run user:reset-password -- --email user@example.com'))
     process.exit(1)
   }
 

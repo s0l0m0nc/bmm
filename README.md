@@ -86,18 +86,18 @@ BMM 是一个用于管理网站书签的开源应用。它把“收藏网页”�
 ### 环境要求
 
 - [Node.js](https://nodejs.org/) >= 24.0.0
-- [pnpm](https://pnpm.io/) >= 10.24.0
+- [Bun](https://bun.sh/) >= 1.3.14
 
 > [!TIP]
-> 首次本地启动默认使用 SQLite。`pnpm dev`、`pnpm build` 和 `pnpm start` 都会先执行数据库初始化脚本，通常不需要手动建库。
+> 首次本地启动默认使用 SQLite。`bun run dev`、`bun run build` 和 `bun run start` 都会先执行数据库初始化脚本，通常不需要手动建库。
 
 ### 本地开发
 
 ```bash
 git clone https://github.com/Y80/bmm.git
 cd bmm
-pnpm install
-pnpm dev
+bun install
+bun run dev
 ```
 
 启动后访问 `http://localhost:3000`。
@@ -108,15 +108,15 @@ pnpm dev
 
 | 命令              | 说明                                             |
 | ----------------- | ------------------------------------------------ |
-| `pnpm dev`        | 启动开发环境，并在启动前执行数据库初始化         |
-| `pnpm build`      | 生产构建                                         |
-| `pnpm start`      | 运行生产构建                                     |
-| `pnpm lint`       | 执行 ESLint                                      |
-| `pnpm test`       | 运行 Vitest 测试                                 |
-| `pnpm db:test`    | 检查数据库是否可连接                             |
-| `pnpm db:migrate` | 生成并执行数据库迁移                             |
-| `pnpm db:push`    | 直接根据 schema 推送数据库变更，可能导致数据风险 |
-| `pnpm studio`     | 打开 Drizzle Studio                              |
+| `bun run dev`        | 启动开发环境，并在启动前执行数据库初始化         |
+| `bun run build`      | 生产构建                                         |
+| `bun run start`      | 运行生产构建                                     |
+| `bun run lint`       | 执行 ESLint                                      |
+| `bun run test`       | 运行 Vitest 测试                                 |
+| `bun run db:test`    | 检查数据库是否可连接                             |
+| `bun run db:migrate` | 生成并执行数据库迁移                             |
+| `bun run db:push`    | 直接根据 schema 推送数据库变更，可能导致数据风险 |
+| `bun run studio`     | 打开 Drizzle Studio                              |
 
 <a id="env"></a>
 
@@ -150,8 +150,8 @@ BMM 目前直接支持 SQLite、PostgreSQL 与 Turso。
 如果你只想检查数据库状态，可以执行：
 
 ```bash
-pnpm db:test
-pnpm db:migrate
+bun run db:test
+bun run db:migrate
 ```
 
 <a id="deployment"></a>
@@ -163,9 +163,9 @@ pnpm db:migrate
 ```bash
 git clone https://github.com/Y80/bmm.git
 cd bmm
-pnpm install
-pnpm build
-pnpm start
+bun install
+bun run build
+bun run start
 ```
 
 ### Docker 部署

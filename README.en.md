@@ -86,18 +86,18 @@ You can use it as:
 ### Requirements
 
 - [Node.js](https://nodejs.org/) >= 24.0.0
-- [pnpm](https://pnpm.io/) >= 10.24.0
+- [Bun](https://bun.sh/) >= 1.3.14
 
 > [!TIP]
-> Local startup uses SQLite by default. `pnpm dev`, `pnpm build`, and `pnpm start` all run the database bootstrap script first, so manual database setup is usually unnecessary.
+> Local startup uses SQLite by default. `bun run dev`, `bun run build`, and `bun run start` all run the database bootstrap script first, so manual database setup is usually unnecessary.
 
 ### Local Development
 
 ```bash
 git clone https://github.com/Y80/bmm.git
 cd bmm
-pnpm install
-pnpm dev
+bun install
+bun run dev
 ```
 
 Then open `http://localhost:3000`.
@@ -108,15 +108,15 @@ Then open `http://localhost:3000`.
 
 | Command           | Description                                                    |
 | ----------------- | -------------------------------------------------------------- |
-| `pnpm dev`        | Start the development server and initialize the database first |
-| `pnpm build`      | Build for production                                           |
-| `pnpm start`      | Run the production build                                       |
-| `pnpm lint`       | Run ESLint                                                     |
-| `pnpm test`       | Run Vitest                                                     |
-| `pnpm db:test`    | Check database connectivity                                    |
-| `pnpm db:migrate` | Generate and apply database migrations                         |
-| `pnpm db:push`    | Push schema changes directly and may risk data loss            |
-| `pnpm studio`     | Open Drizzle Studio                                            |
+| `bun run dev`        | Start the development server and initialize the database first |
+| `bun run build`      | Build for production                                           |
+| `bun run start`      | Run the production build                                       |
+| `bun run lint`       | Run ESLint                                                     |
+| `bun run test`       | Run Vitest                                                     |
+| `bun run db:test`    | Check database connectivity                                    |
+| `bun run db:migrate` | Generate and apply database migrations                         |
+| `bun run db:push`    | Push schema changes directly and may risk data loss            |
+| `bun run studio`     | Open Drizzle Studio                                            |
 
 <a id="env"></a>
 
@@ -150,8 +150,8 @@ BMM currently supports SQLite, PostgreSQL, and Turso directly.
 If you only want to verify database readiness, run:
 
 ```bash
-pnpm db:test
-pnpm db:migrate
+bun run db:test
+bun run db:migrate
 ```
 
 <a id="deployment"></a>
@@ -163,9 +163,9 @@ pnpm db:migrate
 ```bash
 git clone https://github.com/Y80/bmm.git
 cd bmm
-pnpm install
-pnpm build
-pnpm start
+bun install
+bun run build
+bun run start
 ```
 
 ### Docker Deployment

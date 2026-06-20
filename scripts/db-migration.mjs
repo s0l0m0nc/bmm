@@ -16,7 +16,7 @@ async function main() {
   })
 
   let finalChunk = ''
-  for await (const chunk of $`pnpm drizzle-kit generate`.stdout) {
+  for await (const chunk of $`bun drizzle-kit generate`.stdout) {
     echo(chunk)
     finalChunk = chunk
   }
@@ -24,7 +24,7 @@ async function main() {
     echo(chalk.yellow('没有检测到 Schema 变更，无需数据库迁移'))
   } else {
     echo(chalk.green('✅ 已生成本地快照'))
-    for await (const chunk of $`pnpm drizzle-kit migrate`.stdout) {
+    for await (const chunk of $`bun drizzle-kit migrate`.stdout) {
       echo(chunk)
     }
     echo(chalk.green('✅ 数据库迁移成功'))

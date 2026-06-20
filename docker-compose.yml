@@ -26,7 +26,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: pnpm start
+    command: bun run start
 
 volumes:
   postgres_data:

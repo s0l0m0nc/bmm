@@ -14,7 +14,7 @@ async function main() {
     }
   })
 
-  await $`pnpm drizzle-kit push --strict --verbose`.pipe(process.stdout)
+  await $`bun drizzle-kit push --strict --verbose`
   return exitWithDbClose()
 }
 
