@@ -41,6 +41,7 @@
     "@tailwindcss/postcss": "^4.3.1",
     "ahooks": "^3.9.7",
     "ai": "^6.0.208",
+    "ai-sdk-provider-opencode-sdk": "^3.0.6",
     "antd": "6.1.0",
     "cheerio": "1.0.0",
     "color": "^4.2.3",
