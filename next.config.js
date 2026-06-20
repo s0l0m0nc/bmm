@@ -1,15 +1,23 @@
 import nextConst from 'next/constants.js'
-import { checkEnvs } from './scripts/utils.mjs'
-
-let codeInspectorPlugin
-if (process.env.NODE_ENV === 'development') {
-  const { codeInspectorPlugin: plugin } = await import('code-inspector-plugin')
-  codeInspectorPlugin = plugin
-}
 
 export default async function setup(phase) {
   if (phase === nextConst.PHASE_DEVELOPMENT_SERVER || phase === nextConst.PHASE_PRODUCTION_SERVER) {
-    checkEnvs()
+    const requiredVariables = ['DB_DRIVER', 'DB_CONNECTION_URL', 'AUTH_SECRET']
+    const unsetEnv = requiredVariables.filter((variable) => !process.env[variable])
+    if (!process.env.AUTH_URL && process.env.VERCEL_URL) {
+      process.env.AUTH_URL = process.env.VERCEL_URL
+    }
+    if (process.env.NODE_ENV === 'production' && !process.env.AUTH_URL) {
+      unsetEnv.push('AUTH_URL')
+    }
+    if (unsetEnv.length) {
+      console.error('\n环境变量缺失: ' + unsetEnv.join(', ') + '\n')
+      process.exit(1)
+    }
+    if (process.env.DB_DRIVER !== 'postgresql' && process.env.DB_DRIVER !== 'sqlite') {
+      console.error('\nDB_DRIVER 只能为 postgresql 或 sqlite\n')
+      process.exit(1)
+    }
   }
 
   const domainHost = new URL(process.env.AUTH_URL || 'http://localhost').host
@@ -28,14 +36,6 @@ export default async function setup(phase) {
           : undefined,
       ].filter(Boolean),
       dangerouslyAllowSVG: true,
-    },
-    turbopack: {
-      rules: codeInspectorPlugin
-        ? codeInspectorPlugin({
-            bundler: 'turbopack',
-            hideDomPathAttr: true,
-          })
-        : undefined,
     },
     experimental: {
       serverActions: { allowedOrigins: [domainHost] },
