@@ -1,15 +1,13 @@
-import nextConst from 'next/constants.js';
-import { checkEnvs, tryLoadParentGitRepoEnv } from './scripts/utils.mjs';
+import nextConst from 'next/constants.js'
+import { checkEnvs } from './scripts/utils.mjs'
 
-let codeInspectorPlugin;
+let codeInspectorPlugin
 if (process.env.NODE_ENV === 'development') {
-  const { codeInspectorPlugin: plugin } = await import('code-inspector-plugin');
-  codeInspectorPlugin = plugin;
+  const { codeInspectorPlugin: plugin } = await import('code-inspector-plugin')
+  codeInspectorPlugin = plugin
 }
 
 export default async function setup(phase) {
-  tryLoadParentGitRepoEnv()
-
   if (phase === nextConst.PHASE_DEVELOPMENT_SERVER || phase === nextConst.PHASE_PRODUCTION_SERVER) {
     checkEnvs()
   }
@@ -25,18 +23,22 @@ export default async function setup(phase) {
           hostname: '*.iconify.design',
           pathname: '**',
         },
-        process.env.NEXT_PUBLIC_WEBSITE_LOGO ? new URL(process.env.NEXT_PUBLIC_WEBSITE_LOGO) : undefined,
+        process.env.NEXT_PUBLIC_WEBSITE_LOGO
+          ? new URL(process.env.NEXT_PUBLIC_WEBSITE_LOGO)
+          : undefined,
       ].filter(Boolean),
       dangerouslyAllowSVG: true,
     },
     turbopack: {
-      rules: codeInspectorPlugin ? codeInspectorPlugin({
-        bundler: 'turbopack',
-        hideDomPathAttr: true,
-      }) : undefined
+      rules: codeInspectorPlugin
+        ? codeInspectorPlugin({
+            bundler: 'turbopack',
+            hideDomPathAttr: true,
+          })
+        : undefined,
     },
     experimental: {
-      serverActions: { allowedOrigins: [domainHost] }
+      serverActions: { allowedOrigins: [domainHost] },
     },
     typescript: {
       ignoreBuildErrors: Boolean(process.env.IGNORE_BUILD_ERRORS),

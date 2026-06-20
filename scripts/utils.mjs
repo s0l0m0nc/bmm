@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
-import fs from 'fs'
 import asyncFs from 'fs/promises'
 import path from 'path'
 import * as zx from 'zx'
@@ -81,33 +79,10 @@ export async function loadEnv(options = {}) {
   const NextEnv = await import('@next/env')
   const loadEnvConfig = NextEnv.loadEnvConfig || NextEnv.default.loadEnvConfig
   loadEnvConfig(process.cwd(), isProduction)
-  tryLoadParentGitRepoEnv(options)
 }
-
-
-// 当前应用如果作为 git submodule 存在，加载父级目录是的环境配置文件
-export function tryLoadParentGitRepoEnv(options = {}) {
-  if (!fs.existsSync(path.resolve('..', '.gitmodules'))) return
-  const envPaths = [path.resolve('..', '.env'), path.resolve('..', '.env.' + process.env.NODE_ENV)]
-  for (const envPath of envPaths) {
-    if (!fs.existsSync(envPath)) continue
-    dotenv.config({
-      path: envPath,
-      override: true,
-    })
-  }
-  if (!options.silentParentEnvHint) {
-    console.log(zx.chalk.cyan('💡 当前项目作为 git submodule，已加载主目录环境配置'))
-  }
-}
-
 
 export function checkEnvs() {
-  const requiredVariables = [
-    'DB_DRIVER',
-    'DB_CONNECTION_URL',
-    'AUTH_SECRET',
-  ]
+  const requiredVariables = ['DB_DRIVER', 'DB_CONNECTION_URL', 'AUTH_SECRET']
   const unsetEnv = requiredVariables.filter((variable) => !process.env[variable])
   if (!process.env.AUTH_URL && process.env.VERCEL_URL) {
     process.env.AUTH_URL = process.env.VERCEL_URL
@@ -134,7 +109,6 @@ export async function exitWithDbClose(code = 0) {
   }
   process.exit(code)
 }
-
 
 export async function declareLocalType() {
   if (!process.env.DB_DRIVER) throw new Error('环境变量 DB_DRIVER 未定义')
